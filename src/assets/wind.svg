@@ -1,0 +1,7 @@
+<svg id='Wind_Speed_38-42_24' width='32' height='32' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+
+
+<g transform="matrix(0.4 0 0 0.4 12 12)" >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: #999; fill-rule: nonzero; opacity: 1;" transform=" translate(-25.09, -23.22)" d="M 1.8125 14.4375 L 0.1875 15.5625 L 7.1875 25.5625 L 7.46875 26 L 36.09375 26 C 36.582031 29.382813 39.484375 32 43 32 C 46.855469 32 50 28.855469 50 25 C 50 21.144531 46.855469 18 43 18 C 39.484375 18 36.582031 20.617188 36.09375 24 L 26.5 24 L 19.8125 14.4375 L 18.1875 15.5625 L 24.09375 24 L 20.5 24 L 13.8125 14.4375 L 12.1875 15.5625 L 18.09375 24 L 14.5 24 L 7.8125 14.4375 L 6.1875 15.5625 L 12.09375 24 L 8.5 24 Z M 43 20 C 45.773438 20 48 22.226563 48 25 C 48 27.773438 45.773438 30 43 30 C 40.226563 30 38 27.773438 38 25 C 38 22.226563 40.226563 20 43 20 Z" stroke-linecap="round" />
+</g>
+</svg>

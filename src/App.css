@@ -1,0 +1,294 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#root {
+  font-family: 'Netizen', sans-serif;
+  height: 100vh;
+  width: 100%;
+}
+@font-face {
+  font-family: "Netizen";
+  src: url(assets/Netizen.ttf) format(truetype);
+}
+.cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 5rem;
+  /* background-image: url(./assets/background/background.jpg); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+}
+.blocks {
+  /* border: 1px solid red; */
+  width: 100%;
+  /* height: 20rem; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  padding: 1rem;
+}
+.block {
+  /* border: 1px solid red; */
+  color: white;
+  width: 30rem;
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  background-color: hsla(0, 0%, 0%, 0.3);
+  border-radius: 1rem;
+  line-height: 2.5rem;
+}
+.block1 {
+  align-items: center;
+  line-height: 4rem;
+}
+.block2 {
+  font-size: 1.5rem;
+  line-height: 4rem;
+}
+.city {
+  font-size: 2.8rem;
+  font-weight: 800;
+}
+.time, .pop {
+  font-size: 1.5rem;
+}
+.temp {
+  padding-left: .5rem;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  /* margin-left: 1rem; */
+  gap: 1rem;
+}
+.hupress {
+  padding-left: .8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.div {
+  display: flex;
+  gap: 1.2rem;
+}
+.div1 {
+  gap: 1.2rem;
+}
+.intro {
+  font-size: 3rem;
+  font-weight: 500;
+  text-align: center;
+  line-height: 8rem;
+  color: white;
+}
+.intro span {
+  font-size: 2rem;
+  color: white;
+}
+.bg-clip {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7) blur(1px);
+  z-index: -1;
+}
+.introcont {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 5rem;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 5rem;
+}
+.searchCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.inpCont {
+  border: 2px solid white;
+  border-radius: 3rem;
+  padding: 0rem 1rem;
+  width: 20rem;
+}
+.searchIco {
+  height:2.2rem;
+  width: 2.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 3rem;
+  cursor: pointer;
+}
+.searchIcoNext {
+  height:2.2rem;
+  width: 2.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 3rem;
+  cursor: pointer;
+  margin-top: 5rem;
+}
+.hom {
+  position: absolute;
+  top: 5rem;
+  left: 10rem;
+  width: 5rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+  background-color: #08182f;
+  color: white;
+  cursor: pointer;
+}
+.inpContAct {
+  border: 2px solid white;
+  border-radius: 3rem;
+  padding: 0rem 1rem;
+  width: 20rem;
+  margin-top: 5rem;
+}
+.input {
+  height: 2rem;
+  width: 100%;
+  font-size: 1.3rem;
+  outline: none;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+}
+.input::placeholder {
+  color: white;
+}
+.apiButtDiv {
+  position: absolute;
+  top: 1rem;
+  right: 10rem;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.apiButt {
+  padding: .5rem 1rem;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  font-family: 'Netizen', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 10;
+}
+.api {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15rem;
+  height: 10rem;
+  border-radius: 2rem;
+  background-color: #08182f;
+  top: 1rem;
+  right: 7rem;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+.apiSlideDown {
+  transform: translateY(70%);
+  opacity: 1;
+}
+.apiInput {
+  width: 13rem;
+  height: 2rem;
+  border: none;
+  border-radius: 2rem;
+  outline: none;
+  padding: .1rem .5rem;
+}
+.aftersearchcont {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 5rem;
+}
+.introcont,
+.aftersearchcont {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease-in-out;
+}
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  background-color: #08182f;
+  color: white;
+  z-index: 10;
+}
+.errmsgdiv {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #08182f;
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  line-height: 5rem;
+  z-index: 11;
+}
+.errmsgdiv .invinp {
+  color: red;
+}
+.videoErr {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7) blur(1px);
+  z-index: -1;
+}
