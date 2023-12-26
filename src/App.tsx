@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useEffect } from "react";
 import "./App.css";
 import Background from "./assets/background/background.jpg";
-import rainy from "./assets/background/rain-clouds.mp4";
 
 function App() {
   const [apiKey, setApiKey] = useState("d94bcd435b62a031771c35633f9f310a");
-  function formatDate(timestamp) {
+  
+  function formatDate(timestamp:any) {
     const daysOfWeek = [
       "Sunday",
       "Monday",
@@ -37,7 +36,7 @@ function App() {
     const month = months[date.getMonth()];
 
     return `${dayOfWeek} ${dayOfMonth} ${month}`;
-  }
+  } //@ts-ignore
   const [backgroundImg, setBackgroundImg] = useState("url(" + Background + ")");
   let input = document.querySelector(".input") as HTMLInputElement;
   function handleChange(event: any) {
@@ -59,6 +58,7 @@ function App() {
           setTimeout(() => {
             setLoading(false);
           }, 1000);
+          setInputValue("");
           input.value = "";
         }
       }else if(input.value == "") {
@@ -89,7 +89,7 @@ function App() {
 
   let jsonResponse: any;
   const [inputValue, setInputValue] = useState("");
-  const [response, setResponse] = useState({});
+  const [response, setResponse] = useState<{ city?: any; list?: any[] }>({});
   const [showBlock, setShowBlock] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
@@ -101,7 +101,7 @@ function App() {
   const hom = () => {
     setShowBlock(false);
   };
-  const handleApiInputChange = (event) => {
+  const handleApiInputChange = (event:any) => {
     let input = document.querySelector(".apiInput") as HTMLInputElement;
     if (event.key === 'Enter') {
       setApiKey(event.target.value);
@@ -118,6 +118,7 @@ function App() {
             {/* <video autoPlay loop muted className="videoErr" src="src/assets/background/11n.mp4"></video> */}
             <div className="errmsg">
               <p className="invinp">Invalid Input</p>
+              {/* @ts-ignore */}
               <p>{response.message}</p>
             </div>
           </div>
@@ -125,6 +126,7 @@ function App() {
           <div className="aftersearchcont">
             <video
               className="bg-clip"
+              // @ts-ignore
               src={`src/assets/background/${response.list[0].weather[0].icon}.mp4`}
               loop
               autoPlay
@@ -153,32 +155,36 @@ function App() {
                   <p className="city">
                     {response.city.name}, {response.city.country}
                   </p>
+                  {/* @ts-ignore */}
                   <p className="time">{formatDate(response.list[0].dt)}</p>
                   <p className="pop">Population: {response.city.population}</p>
                 </div>
                 <div className="block block2">
                   <div className="temp">
-                    <img
-                      src={`src/assets/icons/${response.list[0].weather[0].icon}.svg`}
-                      alt=""
-                    />
+                    {/* @ts-ignore */}
+                    <img src={`src/assets/icons/${response.list[0].weather[0].icon}.svg`}
+                      alt=""/>
+                    {/* @ts-ignore */}
                     <p className="p1">{response.list[0].temp.day}°C</p>
                     <p className="p1">
-                      {response.list[0].weather[0].main}, &#160;
-                      {response.list[0].weather[0].description}
+                    {/* @ts-ignore */}
+                      {response.list[0].weather[0].main, response.list[0].weather[0].description}
                     </p>
                   </div>
                   <div className="hupress">
                     <div className="div div1">
                       <img src="src/assets/wind.svg" alt="" />
+                      {/* @ts-ignore */}
                       <p>{response.list[0].speed} m/s N</p>
                     </div>
                     <div className="div">
                       <img src="src/assets/pressure.svg" alt="" />
+                      {/* @ts-ignore */}
                       <p>{response.list[0].pressure} hpa</p>
                     </div>
                     <div className="div">
                       <img src="src/assets/humidity.svg" />
+                      {/* @ts-ignore */}
                       <p>{response.list[0].humidity}%</p>
                     </div>
                   </div>
