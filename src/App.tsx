@@ -3,9 +3,10 @@ import "./App.css";
 import Background from "./assets/background/background.jpg";
 
 function App() {
-  const [apiKey, setApiKey] = useState("d94bcd435b62a031771c35633f9f310a");
-  
-  function formatDate(timestamp:any) {
+  // const [apiKey, setApiKey] = useState("d94bcd435b62a031771c35633f9f310a"); // old (from hassoun, not working)
+  const [apiKey, setApiKey] = useState("253b3dbf181d84b475292aa38452658e");
+
+  function formatDate(timestamp: any) {
     const daysOfWeek = [
       "Sunday",
       "Monday",
@@ -45,24 +46,24 @@ function App() {
   async function sendInput(event: any) {
     if (input && event.key === "Enter") {
       setInputValue(input.value);
-      if(inputValue !== "") {
+      if (inputValue !== "") {
         try {
           setLoading(true);
           await sendRequest();
         } finally {
           setShowBlock(true);
-          if (jsonResponse.cod !== "200") {
+          if (jsonResponse.cod !== 200) {
             displayError();
           }
-          console.log(jsonResponse)
+          console.log(jsonResponse);
           setTimeout(() => {
             setLoading(false);
           }, 1000);
           setInputValue("");
           input.value = "";
         }
-      }else if(input.value == "") {
-        window.alert("AT LEAST ONE CHARACTER FGS")
+      } else if (input.value == "") {
+        window.alert("AT LEAST ONE CHARACTER FGS");
       }
     }
   }
@@ -76,7 +77,7 @@ function App() {
     }, 1500);
   }
   async function sendRequest() {
-    const requestURL = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${inputValue}&units=metric&cnt=7&appid=${apiKey}`;
+    const requestURL = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${apiKey}`;
 
     // fetch new data
     const resp = await fetch(requestURL);
@@ -84,12 +85,59 @@ function App() {
     await setResponse(jsonResponse);
   }
   const handleSearchIconClick = () => {
-    sendInput({ key: 'Enter' });
+    sendInput({ key: "Enter" });
+  };
+
+  type WeatherResponse = {
+    coord: { lon: number; lat: number };
+    weather: {
+      id: number;
+      main: string;
+      description: string;
+      icon: string;
+    }[];
+    base: string;
+    main: {
+      temp: number;
+      feels_like: number;
+      temp_min: number;
+      temp_max: number;
+      pressure: number;
+      humidity: number;
+      sea_level?: number;
+      grnd_level?: number;
+    };
+    visibility: number;
+    wind: {
+      speed: number;
+      deg: number;
+      gust?: number;
+    };
+    rain?: {
+      "1h": number;
+    };
+    snow?: {
+      "1h": number;
+    };
+    clouds: { all: number };
+    dt: number;
+    sys: {
+      type: number;
+      id: number;
+      country: string;
+      sunrise: number;
+      sunset: number;
+    };
+    timezone: number;
+    id: number;
+    name: string;
+    cod: number;
   };
 
   let jsonResponse: any;
   const [inputValue, setInputValue] = useState("");
-  const [response, setResponse] = useState<{ city?: any; list?: any[] }>({});
+  // const [response, setResponse] = useState<{ city?: any; list?: any[] }>({});
+  const [response, setResponse] = useState<WeatherResponse | null>(null);
   const [showBlock, setShowBlock] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
@@ -101,13 +149,13 @@ function App() {
   const hom = () => {
     setShowBlock(false);
   };
-  const handleApiInputChange = (event:any) => {
+  const handleApiInputChange = (event: any) => {
     let input = document.querySelector(".apiInput") as HTMLInputElement;
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       setApiKey(event.target.value);
       input.value = "";
     }
-  }
+  };
 
   return (
     <div className="cont">
@@ -127,7 +175,7 @@ function App() {
             <video
               className="bg-clip"
               // @ts-ignore
-              src={`src/assets/background/${response.list[0].weather[0].icon}.mp4`}
+              src={`src/assets/background/${response.weather[0].icon}.mp4`}
               loop
               autoPlay
               muted
@@ -136,56 +184,63 @@ function App() {
               <p>Home</p>
             </div>
             <div className="searchCont">
-              
-            <div className="inpContAct">
-              <input
-                className="input"
-                type="text"
-                onKeyDown={sendInput}
-                onChange={handleChange}
-                placeholder="Search"/>
-            </div>
-            <div className="searchIcoNext" onClick={handleSearchIconClick}>
+              <div className="inpContAct">
+                <input
+                  className="input"
+                  type="text"
+                  onKeyDown={sendInput}
+                  onChange={handleChange}
+                  placeholder="Search"
+                />
+              </div>
+              <div className="searchIcoNext" onClick={handleSearchIconClick}>
                 <img src="src/assets/search.svg" alt="" />
               </div>
             </div>
-            {response.city && (
+            {/* @ts-ignore */}
+            {response.sys.country && (
               <div className="blocks">
                 <div className="block block1">
                   <p className="city">
-                    {response.city.name}, {response.city.country}
+                    {/* @ts-ignore */}
+                    {response.sys.id}, {response.sys.country}
                   </p>
                   {/* @ts-ignore */}
-                  <p className="time">{formatDate(response.list[0].dt)}</p>
-                  <p className="pop">Population: {response.city.population}</p>
+                  <p className="time">{formatDate(response.dt)}</p>
+                  {/* <p className="pop">Population: {response.city.population}</p> */}
                 </div>
                 <div className="block block2">
                   <div className="temp">
                     {/* @ts-ignore */}
-                    <img src={`src/assets/icons/${response.list[0].weather[0].icon}.svg`}
-                      alt=""/>
+                    <img
+                      src={`src/assets/icons/${response.weather[0].icon}.svg`}
+                      alt=""
+                    />
                     {/* @ts-ignore */}
-                    <p className="p1">{response.list[0].temp.day}°C</p>
+                    <p className="p1">{response.main.temp}°C</p>
                     <p className="p1">
-                    {/* @ts-ignore */}
-                      {response.list[0].weather[0].main, response.list[0].weather[0].description}
+                      {/* @ts-ignore */}
+                      {
+                        (response.weather[0].main,
+                        response.weather[0].description)
+                      }
                     </p>
                   </div>
                   <div className="hupress">
                     <div className="div div1">
                       <img src="src/assets/wind.svg" alt="" />
                       {/* @ts-ignore */}
-                      <p>{response.list[0].speed} m/s N</p>
+                      <p>{response.wind.speed} m/s N</p>
                     </div>
                     <div className="div">
                       <img src="src/assets/pressure.svg" alt="" />
                       {/* @ts-ignore */}
-                      <p>{response.list[0].pressure} hpa</p>
+                      <p>{response.main.pressure} hpa</p>
                     </div>
                     <div className="div">
                       <img src="src/assets/humidity.svg" />
                       {/* @ts-ignore */}
-                      <p>{response.list[0].humidity}%</p>
+                      <p>{response.main.humidity}%</p>
                     </div>
                   </div>
                 </div>
@@ -204,7 +259,7 @@ function App() {
                   onKeyDown={sendInput}
                   onChange={handleChange}
                   placeholder="Search"
-                  />
+                />
               </div>
               <div className="searchIco" onClick={handleSearchIconClick}>
                 <img src="src/assets/search.svg" alt="" />
