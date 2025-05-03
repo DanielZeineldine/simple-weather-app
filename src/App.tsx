@@ -213,7 +213,9 @@ function App() {
                   <div className="temp">
                     {/* @ts-ignore */}
                     <img
-                      src={`src/assets/icons/${response.weather[0].icon}.svg`}
+                      src={`src/assets/icons/${
+                        response ? response.weather[0].icon : ""
+                      }.svg`}
                       alt=""
                     />
                     {/* @ts-ignore */}
