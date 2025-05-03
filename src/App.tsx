@@ -220,10 +220,7 @@ function App() {
                     <p className="p1">{response.main.temp}°C</p>
                     <p className="p1">
                       {/* @ts-ignore */}
-                      {
-                        (response.weather[0].main,
-                        response.weather[0].description)
-                      }
+                      {(response.weather.main, response.weather.description)}
                     </p>
                   </div>
                   <div className="hupress">
